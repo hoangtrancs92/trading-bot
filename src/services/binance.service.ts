@@ -153,7 +153,6 @@ export class BinanceService {
 
     async fetchHistoricalCandles(symbol: string, interval: any, limit: number): Promise<Candle[]> {
         const candles = await client.candles({ symbol, interval, limit });
-        console.log(candles);
         return candles.map((c) => ({
             open: parseFloat(c.open),
             high: parseFloat(c.high),

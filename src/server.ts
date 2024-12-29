@@ -5,12 +5,7 @@ import routes from "./routes"
 import bodyParser from "body-parser";
 import sequelize from './config/connection';
 import { logger } from './config/logger.config';
-
-
-interface VolumeData {
-    time: string;
-    volume: number;
-  }
+import { BinanceBotJob } from './cronjob/MarketBotJob';
 
 dotenv.config();
 const app = express();
@@ -27,6 +22,8 @@ sequelize.authenticate()
     });
 
 app.use('/api', routes());
+
+BinanceBotJob();
 
 app.listen(port, () => {
     logger.info(`Server is running on port ${port}`);
